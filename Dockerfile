@@ -1,7 +1,7 @@
 FROM debian:buster
 
 RUN apt-get update \
-    && apt-get install wget
+    && apt-get install -y wget
 
 RUN wget http://flightaware.com/adsb/piaware/files/packages/pool/piaware/p/piaware-support/piaware-repository_3.7.1_all.deb \
     && dpkg -i piaware-repository_3.7.1_all.deb
