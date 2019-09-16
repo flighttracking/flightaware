@@ -1,0 +1,15 @@
+version: 2
+jobs:
+ build:
+   machine: true
+   steps:
+     - checkout
+     
+     - run: |
+         echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+
+     # build the application image
+     - run: docker build -t flighttracking/flightaware:$CIRCLE_BRANCH .
+
+     # deploy the image
+     - run: docker push flighttracking/flightaware:$CIRCLE_BRANCH
