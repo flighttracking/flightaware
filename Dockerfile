@@ -1,4 +1,4 @@
-FROM debian:xenial
+FROM debian:buster
 
 RUN wget http://flightaware.com/adsb/piaware/files/packages/pool/piaware/p/piaware-support/piaware-repository_3.7.1_all.deb \
     && dpkg -i piaware-repository_3.7.1_all.deb
