@@ -5,9 +5,6 @@ jobs:
     - image: ubuntu:xenial
    steps:
      - checkout
-
-     - run: |
-        sh git clone --single-branch --branch master https://github.com/flightaware/piaware_builder.git /git/
      - run: |
          apt-get update \
          && apt-get install -y \
@@ -17,8 +14,10 @@ jobs:
          dh-systemd libz-dev \
          git wget \
          devscripts 
+     - run: |
+        sh git clone --single-branch --branch master https://github.com/flightaware/piaware_builder.git /git/
      - run : |
-        sh sensible-build.sh xenial
+        sh cd /git/piaware_builder/ && sensible-build.sh xenial
      - run: | 
         cd /git/piaware_builder/package-xenial && dpkg-buildpackage -b -uc -us
 
