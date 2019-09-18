@@ -5,7 +5,9 @@ jobs:
     - image: ubuntu:xenial
    steps:
      - checkout
-     
+
+     - run: |
+        sh git clone --single-branch --branch master https://github.com/flightaware/piaware_builder.git /git/
      - run: |
          apt-get update \
          && apt-get install -y \
@@ -18,10 +20,8 @@ jobs:
      - run : |
         sh sensible-build.sh xenial
      - run: | 
-        cd package-xenial && dpkg-buildpackage -b -uc -us
-     
-     - run: |
-        sh git clone --single-branch --branch master https://github.com/flightaware/piaware_builder.git /git/
+        cd /git/piaware_builder/package-xenial && dpkg-buildpackage -b -uc -us
+
      - run: |
          echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
 
