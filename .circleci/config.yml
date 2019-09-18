@@ -6,10 +6,8 @@ jobs:
    steps:
      - checkout
      - run: |
-        sh git clone --single-branch --branch master git@github.com:flightaware/piaware_builder.git /git/piaware_builder
-     - run : |
-        sh cd /git/piaware_builder/ && sensible-build.sh xenial
-     - run: | 
+        git clone --single-branch --branch master https://github.com/flighttracking/flightaware.git /git/piaware_builder
+        cd /git/piaware_builder/ && sensible-build.sh xenial
         cd /git/piaware_builder/package-xenial && dpkg-buildpackage -b -uc -us
 
      - run: |
